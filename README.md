@@ -51,7 +51,7 @@ Remember that your README should:
 import argparse
 parser=argparse.ArgumentParser()
 ## Model directory
-parser.add_argument("--model-dir", type=str, default=os.environ["SM_MODEL_DIR"]) # location for storing model artificat
+parser.add_argument("--model-dir", type=str, default=os.environ["SM_MODEL_DIR"]) # Retreive from Estimator(output_path = )
 ## Data directory
 ### For single location
 parser.add_argument("--data-dir", type=str, default=os.environ["SM_CHANNEL_TRAINING"]) # Retreive from tuner.fit({"training": inputs})
