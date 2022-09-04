@@ -59,5 +59,12 @@ parser.add_argument("--data-dir", type=str, default=os.environ["SM_CHANNEL_TRAIN
 parser.add_argument("--train", type=str, default=os.environ.get("SM_CHANNEL_TRAIN")) # Retreive from tuner.fit({"train": inputs}
 parser.add_argument("--test", type=str, default=os.environ.get("SM_CHANNEL_TEST")) # # Retreive from tuner.fit({"test": inputs}
 
+# 2. Model as hyparameter
+hyperparameters = {
+    ...
+    "model": "resnext50_32x4d",
+}
+parser.add_argument("--model", type=str, default="resnet50")
+net = models.__dict__[opt.model](pretrained=True)
 ```
 ### For training techniques
