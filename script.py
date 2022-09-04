@@ -4,7 +4,6 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torch.optim import lr_scheduler
 import torchvision
 from torchvision import datasets, models, transforms
 import argparse
@@ -47,7 +46,7 @@ def test(model, device, test_loader, criterion):
             )
         )
 
-def train(model, device, dataloaders, criterion, optimizer, scheduler, args):
+def train(model, device, dataloaders, criterion, optimizer, args):
     '''
     TODO: Complete this function that can take a model and
           data loaders for training and will get train the model
@@ -90,7 +89,6 @@ def train(model, device, dataloaders, criterion, optimizer, scheduler, args):
             epoch_loss = running_loss / dataset_sizes
             epoch_acc = running_corrects.double() / dataset_sizes
             if phase == 'train':
-                scheduler.step()
                 train_epoch_loss = epoch_loss
                 train_epoch_acc = epoch_acc
             else:
@@ -180,14 +178,12 @@ def main(args):
     TODO: Create your loss and optimizer
     '''
     loss_criterion = nn.CrossEntropyLoss()
-    optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum)
-    exp_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=7, gamma=0.1)
-    
+    optimizer = optim.Adam(model.parameters(), lr=args.lr)
     '''
     TODO: Call the train function to start training your model
     Remember that you will need to set up a way to get training data from S3
     '''
-    model = train(model, device, train_loader, loss_criterion, optimizer, exp_lr_scheduler, args)
+    model = train(model, device, train_loader, loss_criterion, optimizer, args)
     
     '''
     TODO: Test the model to see its accuracy
@@ -229,9 +225,6 @@ if __name__=='__main__':
     )
     parser.add_argument(
         "--lr", type=float, default=0.01, metavar="LR", help="learning rate (default: 0.01)"
-    )
-    parser.add_argument(
-        "--momentum", type=float, default=0.5, metavar="M", help="SGD momentum (default: 0.5)"
     )
 
     # Container environment
