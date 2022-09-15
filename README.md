@@ -4,6 +4,15 @@ Use transfered learning with pretrained model of Resnet18 and Resnet50 in Pytorc
 
 ## Project Set Up and Installation
 
+### Files
+```
+1. train_and_deploy.ipynb: Use sagamaker for train and deploy model in Notebook instance
+2. hpo.py: Script for hypeparameter tuning.
+3. train_model.py: Script for training the final model
+4. inference_final.py: Script for construct endpoint
+```
+
+### Packages preparation
 ```
 # For Notebook instance 
 import sagemaker
