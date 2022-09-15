@@ -13,12 +13,20 @@ Use transfered learning with pretrained model of Resnet18 and Pytorch Framework 
 
 ### Overview
 **TODO**: Explain about the data you are using and where you got it from.
+Come from Dog Breed Identification dataset(https://www.kaggle.com/competitions/dog-breed-identification/data)
+Now the dataset I used has 133 breeds.
 
 ### Access
 **TODO**: Explain how you are accessing the data in AWS and how you uploaded it
+Upload the data into S3 by AWS console with three folders including train, test, and valid.
 
 ## Hyperparameter Tuning
 **TODO**: What kind of model did you choose for this experiment and why? Give an overview of the types of parameters and their ranges used for the hyperparameter search
+
+Use both ResNet18 and ResNet50 for transfer learning, since ResNet has strong edge to achieve higher accuracy in network performance especially in the application of Image Classification.
+
+The hyperparamter used in model are learning rate and batch size with the range between 
+
 
 Remember that your README should:
 - Include a screenshot of completed training jobs
