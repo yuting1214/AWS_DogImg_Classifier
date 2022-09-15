@@ -80,7 +80,6 @@ Upload the data into S3 by AWS console with three folders including train, test,
 Directory: s3://udacity-mark/Proj3/dogImages/
 ```
 
-
 ## Hyperparameter Tuning
 
 Use both ResNet18 and ResNet50 for transfer learning, since ResNet has strong edges to achieve higher accuracy in network performance especially in the application of Image Classification.
@@ -103,10 +102,15 @@ hyperparameter_ranges = {
 ```
 
 ### Completed training jobs:
+![ResNet18](https://github.com/yuting1214/Udacity_Proj3/blob/main/screenshot/Training_complete_resnet18.png)
+
+![ResNet50](https://github.com/yuting1214/Udacity_Proj3/blob/main/screenshot/Training_complete_resnet50.png)
 
 ### Logs metrics:
 
-Example of the logs metrics in one of the training jobs.
+Example of the logs metrics in one of the training job
+
+![logs metrics](https://github.com/yuting1214/Udacity_Proj3/blob/main/screenshot/Log_metrics.png)
 
 ### Best combinations of hyperparameters
 
@@ -141,9 +145,10 @@ rules = [
 ```
 
 ### Results
-**TODO**: What are the results/insights did you get by profiling/debugging your model?
 
 Take the profiler report from training ResNet18 model as an instance, since we're using fine-tuned mechanisum to update the weights of the neural network. The main comsumption of comptutaional resouces spent on updating the weights in the pretrained layers especially the CNN layers.
+
+![Profiler Report](https://github.com/yuting1214/Udacity_Proj3/blob/main/screenshot/profiler.png)
 
 
 ## Model Deployment
@@ -173,12 +178,12 @@ pred2 = predictor.predict(json.dumps(request_dict), initial_args={"ContentType":
 pred2
 # '002.Afghan_hound'
 ```
-**TODO**: Give an overview of the deployed model and instructions on how to query the endpoint with a sample input.
 
-**TODO** Remember to provide a screenshot of the deployed active endpoint in Sagemaker.
+![Endpoint](https://github.com/yuting1214/Udacity_Proj3/blob/main/screenshot/endpoint.png)
+
+![Example](https://github.com/yuting1214/Udacity_Proj3/blob/main/screenshot/dog_example.png)
 
 ## Standout Suggestions
-**TODO (Optional):** This is where you can provide information about any standout suggestions that you have attempted.
 
 Try deploy models with Docker when available.
 
