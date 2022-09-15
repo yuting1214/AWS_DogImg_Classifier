@@ -83,22 +83,68 @@ Directory: s3://udacity-mark/Proj3/dogImages/
 ## Hyperparameter Tuning
 **TODO**: What kind of model did you choose for this experiment and why? Give an overview of the types of parameters and their ranges used for the hyperparameter search
 
-Use both ResNet18 and ResNet50 for transfer learning, since ResNet has strong edge to achieve higher accuracy in network performance especially in the application of Image Classification.
+Use both ResNet18 and ResNet50 for transfer learning, since ResNet has strong edges to achieve higher accuracy in network performance especially in the application of Image Classification.
 
-The hyperparamter used in model are learning rate and batch size with the range between 
+The hyperparamters used in model are learning rate and batch size.
 
+Use Bayesian Optimization to conduct hyperparameter-tuning with 4 hyperparameter combinations in each architecture.
 
-Remember that your README should:
-- Include a screenshot of completed training jobs
-- Logs metrics during the training process
-- Tune at least two hyperparameters
-- Retrieve the best best hyperparameters from all your training jobs
+```
+# ResNet18
+hyperparameter_ranges = {
+    "lr": ContinuousParameter(0.001, 0.01),
+    "batch-size": CategoricalParameter([32, 64]),
+}
+# ResNet50
+hyperparameter_ranges = {
+    "learning_rate": ContinuousParameter(0.001, 0.1),
+    "batch_size": CategoricalParameter([32, 64, 128, 256, 512]),
+}
+```
+
+### Completed training jobs:
+
+### Logs metrics:
+
+Example of the logs metrics in one of the training jobs.
+
+### Best combinations of hyperparameters
+
+```
+{'_tuning_objective_metric': '"Test Loss"',
+ 'batch_size': '"128"',
+ 'learning_rate': '0.004338940031756185',
+ 'sagemaker_container_log_level': '20',
+ 'sagemaker_estimator_class_name': '"PyTorch"',
+ 'sagemaker_estimator_module': '"sagemaker.pytorch.estimator"',
+ 'sagemaker_job_name': '"Proj_4_pytorch_dog_hpo-2022-09-13-19-59-49-759"',
+ 'sagemaker_program': '"hpo.py"',
+ 'sagemaker_region': '"us-east-2"',
+ 'sagemaker_submit_directory': '"s3://sagemaker-us-east-2-800573291199/Proj_4_pytorch_dog_hpo-2022-09-13-19-59-49-759/source/sourcedir.tar.gz"'}
+```
 
 ## Debugging and Profiling
 **TODO**: Give an overview of how you performed model debugging and profiling in Sagemaker
 
+```
+# For Debugger, check the following properties
+
+rules = [
+    Rule.sagemaker(rule_configs.vanishing_gradient()),
+    Rule.sagemaker(rule_configs.overtraining()),
+    Rule.sagemaker(rule_configs.loss_not_decreasing())
+]
+# For Profiler, render the Profiler Report
+
+rules = [
+    ProfilerRule.sagemaker(rule_configs.ProfilerReport())
+]
+```
+
+
 ### Results
 **TODO**: What are the results/insights did you get by profiling/debugging your model?
+
 
 **TODO** Remember to provide the profiler html/pdf file in your submission.
 
