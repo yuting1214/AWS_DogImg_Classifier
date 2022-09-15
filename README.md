@@ -124,7 +124,6 @@ Example of the logs metrics in one of the training jobs.
 ```
 
 ## Debugging and Profiling
-**TODO**: Give an overview of how you performed model debugging and profiling in Sagemaker
 
 ```
 # For Debugger, check the following properties
@@ -141,12 +140,10 @@ rules = [
 ]
 ```
 
-
 ### Results
 **TODO**: What are the results/insights did you get by profiling/debugging your model?
 
-
-**TODO** Remember to provide the profiler html/pdf file in your submission.
+Take the profiler report from training ResNet18 model as an instance, since we're using fine-tuned mechanisum to update the weights of the neural network. The main comsumption of comptutaional resouces spent on updating the weights in the pretrained layers especially the CNN layers.
 
 
 ## Model Deployment
@@ -156,6 +153,8 @@ rules = [
 
 ## Standout Suggestions
 **TODO (Optional):** This is where you can provide information about any standout suggestions that you have attempted.
+
+Try deploy models with Docker when available.
 
 ## Note
 
@@ -182,3 +181,8 @@ parser.add_argument("--model", type=str, default="resnet50")
 net = models.__dict__[opt.model](pretrained=True)
 ```
 ### For training techniques
+```
+# 1. Remember to shuffle the data when using dataloader
+# 2. For some optimizer, like Adam, be sure to set lower learning rate(lr.)
+```
+
