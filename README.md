@@ -51,8 +51,9 @@ import argparse
 ### Overview
 
 Come from [Dog Breed Identification dataset](https://www.kaggle.com/competitions/dog-breed-identification/data).
-Now the dataset I used has 133 breeds.
+Now the dataset used in this project has 133 breeds.
 
+### Preprocessing
 ```
 Issue_1
 Error: OSError: image file is truncated (150 bytes not processed)
@@ -81,7 +82,6 @@ Directory: s3://udacity-mark/Proj3/dogImages/
 
 
 ## Hyperparameter Tuning
-**TODO**: What kind of model did you choose for this experiment and why? Give an overview of the types of parameters and their ranges used for the hyperparameter search
 
 Use both ResNet18 and ResNet50 for transfer learning, since ResNet has strong edges to achieve higher accuracy in network performance especially in the application of Image Classification.
 
@@ -147,6 +147,32 @@ Take the profiler report from training ResNet18 model as an instance, since we'r
 
 
 ## Model Deployment
+
+### Overview
+
+1. Use The [SageMaker PyTorch Model Server](https://sagemaker.readthedocs.io/en/stable/frameworks/pytorch/using_pytorch.html#id3)
+
+2. Create inference.py for serializing prediction
+
+3. Create an instance of "PyTorchModel" 
+
+4. In PyTorchModel, specify the directory of inference.py as entry_point and the model artificat
+ 
+5. Deploy an endpoint wtih EC2 instance of "ml.m5.xlarge" due to free-tier.
+
+### Example
+```
+# 1. Provide the url of image
+
+request_dict={ "url": "https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/26151212/Afghan-Hound-standing-in-a-garden.jpg"}
+img_bytes = requests.get(request_dict['url']).content
+Image.open(io.BytesIO(img_bytes))
+
+# 2. Invocate the endpoint to make a prediction of the input
+pred2 = predictor.predict(json.dumps(request_dict), initial_args={"ContentType": "application/json"})
+pred2
+# '002.Afghan_hound'
+```
 **TODO**: Give an overview of the deployed model and instructions on how to query the endpoint with a sample input.
 
 **TODO** Remember to provide a screenshot of the deployed active endpoint in Sagemaker.
