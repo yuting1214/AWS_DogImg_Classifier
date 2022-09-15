@@ -5,36 +5,80 @@ Use transfered learning with pretrained model of Resnet18 and Resnet50 in Pytorc
 ## Project Set Up and Installation
 
 ```
-import d
+# For Notebook instance 
+import sagemaker
+from sagemaker.tuner import (
+    IntegerParameter,
+    CategoricalParameter,
+    ContinuousParameter,
+    HyperparameterTuner,
+)
+from sagemaker.pytorch import PyTorch
+
+# For training script
+import numpy as np
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from torch.optim import lr_scheduler
+import torchvision
+from torchvision import datasets, models, transforms
+import argparse
+import os
+import sys
+import logging
+import json
+from tqdm import tqdm
+
+# For inference script
+import json
+import logging
+import sys
+import os
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import torchvision.models as models
+import torchvision.transforms as transforms
+from PIL import Image
+import io
+import requests
+import argparse
+
 ```
 ## Dataset
 
 ### Overview
-**TODO**: Explain about the data you are using and where you got it from.
-Come from Dog Breed Identification dataset(https://www.kaggle.com/competitions/dog-breed-identification/data)
+
+Come from [Dog Breed Identification dataset](https://www.kaggle.com/competitions/dog-breed-identification/data).
 Now the dataset I used has 133 breeds.
 
 ```
-Issue1
+Issue_1
 Error: OSError: image file is truncated (150 bytes not processed)
 
 Cause: PIl fails to load the image(dogImages\train\Leonberger_06571.jpg).
 
-Solution: Create a new image by PIL
+Solution: 
+
+#Create a new image by PIL
+try:
+with Image.open(os.path.normpath(r'C:\Users\l501l\Desktop\Leonberger_06571.jpg')) as im:
+    im.save(os.path.normpath(r'C:\Users\l501l\Desktop\Leonberger_06571_new.jpg'))
+except OSError:
+    print("cannot convert", infile)
 
 Sources:
 https://discuss.pytorch.org/t/oserror-image-file-is-truncated-28-bytes-not-processed-during-learning/36815/21
 ```
 
-try:
-with Image.open(os.path.normpath(r’C:\Users\l501l\Desktop\Leonberger_06571.jpg’)) as im:
-im.save(os.path.normpath(r’C:\Users\l501l\Desktop\Leonberger_06571_new.jpg’))
-except OSError:
-print(“cannot convert”, infile)
-
 ### Access
-**TODO**: Explain how you are accessing the data in AWS and how you uploaded it
+```
 Upload the data into S3 by AWS console with three folders including train, test, and valid.
+
+Directory: s3://udacity-mark/Proj3/dogImages/
+```
+
 
 ## Hyperparameter Tuning
 **TODO**: What kind of model did you choose for this experiment and why? Give an overview of the types of parameters and their ranges used for the hyperparameter search
