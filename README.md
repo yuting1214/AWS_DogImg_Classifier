@@ -1,10 +1,6 @@
-**NOTE:** This file is a template that you can use to create the README for your project. The **TODO** comments below will highlight the information you should be sure to include.
-
 # Dog breeds image classification
 
-Use transfered learning with pretrained model of Resnet18 and Pytorch Framework to conduct a image classification task on classifying 133 dog breeds.
-
-**TODO:** Write a short introduction to your project.
+Use transfered learning with pretrained model of Resnet18 and Resnet50 in Pytorch Framework to conduct a image classification task of classifying 133 dog breeds.
 
 ## Project Set Up and Installation
 **OPTIONAL:** If your project has any special installation steps, this is where you should put it. To turn this project into a professional portfolio project, you are encouraged to make your `README` detailed and self-explanatory. For instance, here you could explain how to set up your project in AWS and provide helpful screenshots of the process.
@@ -15,6 +11,24 @@ Use transfered learning with pretrained model of Resnet18 and Pytorch Framework 
 **TODO**: Explain about the data you are using and where you got it from.
 Come from Dog Breed Identification dataset(https://www.kaggle.com/competitions/dog-breed-identification/data)
 Now the dataset I used has 133 breeds.
+
+```
+Issue1
+Error: OSError: image file is truncated (150 bytes not processed)
+
+Cause: PIl fails to load the image(dogImages\train\Leonberger_06571.jpg).
+
+Solution: Create a new image by PIL
+
+Sources:
+https://discuss.pytorch.org/t/oserror-image-file-is-truncated-28-bytes-not-processed-during-learning/36815/21
+```
+
+try:
+with Image.open(os.path.normpath(r’C:\Users\l501l\Desktop\Leonberger_06571.jpg’)) as im:
+im.save(os.path.normpath(r’C:\Users\l501l\Desktop\Leonberger_06571_new.jpg’))
+except OSError:
+print(“cannot convert”, infile)
 
 ### Access
 **TODO**: Explain how you are accessing the data in AWS and how you uploaded it
