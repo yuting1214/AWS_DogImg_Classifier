@@ -1,4 +1,4 @@
-# End-to-end Dog breeds image classification
+# End-to-end Dog breeds image classifier in AWS
 
 Use transfered learning with pretrained model of Resnet18 and Resnet50 in Pytorch Framework to conduct a image classification task of classifying 133 dog breeds.
 
