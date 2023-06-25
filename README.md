@@ -1,6 +1,16 @@
 # End-to-end Dog breeds image classifier in AWS
 
-Use transfered learning with pretrained model of Resnet18 and Resnet50 in Pytorch Framework to conduct a image classification task of classifying 133 dog breeds.
+Established an end-to-end data API service for image classification in AWS, utilizing transfer learning with pre-trained models in PyTorch for a task involving the classification of 133 dog breeds.
+
+:question: **Problem:** How to establish an end-to-end data API service for image classification in AWS.
+
+:key: **Importance:** Demonstrate the ability to deploy a data solution by integrating data engineering skills with advanced deep learning techniques.
+
+🎉 **Achievements:** Implemented transfer learning with pre-trained models to accurately classify a diverse set of 133 dog breeds in 90% accuracy, and established an efficient API service in AWS for seamless integration with other applications.
+
+💪 **Skills:** Python, Pytorch, AWS SageMaker, Deep learning
+
+:books: **Insights:** The cost-effective way to train, fine-tune, and deploy models in AWS cloud services.
 
 ## Project Set Up and Installation
 
